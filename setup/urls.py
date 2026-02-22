@@ -1,22 +1,14 @@
 from django.contrib import admin
 from django.urls import path
-from core.views import home
-from django.contrib.auth import views as auth_views
+from core import views
 
 urlpatterns = [
-    # ADMIN
     path('admin/', admin.site.urls),
-
-    # HOME
-    path('', home, name='home'),
-
-    # LOGIN
-    path('login/', auth_views.LoginView.as_view(
-        template_name='registration/login.html'
-    ), name='login'),
-
-    # LOGOUT
-    path('logout/', auth_views.LogoutView.as_view(
-        next_page='login'
-    ), name='logout'),
+    path('', views.home, name='home'),
+    path('login/', views.login_view, name='login'),  # You'll need to create these
+    path('logout/', views.logout_view, name='logout'),
+    path('register/', views.register_view, name='register'),
+    path('profile/', views.profile_view, name='profile'),
+    path('about/', views.about_view, name='about'),
+    path('contact/', views.contact_view, name='contact'),
 ]

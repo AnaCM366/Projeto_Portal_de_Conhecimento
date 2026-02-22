@@ -1,17 +1,551 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Dark Mode</title>
+    
+    <!-- Load static files -->
+    {% load static %}
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Dark Mode Google Style with Purple Accents */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Google-style header */
+        header {
+            background: rgba(18, 18, 24, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2a2a35;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+
+        /* Main container */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Google-style welcome section */
+        .welcome-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(145deg, #13131a, #0d0d12);
+            border-radius: 32px;
+            margin-bottom: 3rem;
+            border: 1px solid #2a2a35;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+        }
+
+        .welcome-section p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* User card - Google Material style */
+        .user-card {
+            background: #13131a;
+            border-radius: 28px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid #2a2a35;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .user-info h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .status-dot.offline {
+            background: #6b7280;
+            box-shadow: none;
+        }
+
+        .username-tag {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: #1e1e2a;
+            border-radius: 100px;
+            color: #a78bfa;
+            font-weight: 500;
+            border: 1px solid #2a2a35;
+            margin: 1rem 0;
+        }
+
+        /* Google-style buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #8b5cf6;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-secondary {
+            background: #1e1e2a;
+            color: #e0e0e0;
+            border: 1px solid #2a2a35;
+        }
+
+        .btn-secondary:hover {
+            background: #2a2a35;
+            border-color: #7c3aed;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+        }
+
+        /* Features grid */
+        .features-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 4rem 0 2rem;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: #13131a;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #2a2a35;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #a78bfa);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #7c3aed;
+            box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: #13131a;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #2a2a35;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0d12;
+            border-top: 1px solid #2a2a35;
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .welcome-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .user-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Search bar style (optional) */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: #1e1e2a;
+            border: 1px solid #2a2a35;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .search-box::placeholder {
+            color: #6b7280;
+        }
+    </style>
 </head>
 <body>
-   <h1>Funcionando 🚀</h1>
+    <header>
+        <nav>
+            <div class="logo">✨ DarkFlow</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about/">About</a>
+                <a href="/features/">Features</a>
+                <a href="/contact/">Contact</a>
+                {% if user.is_authenticated %}
+                <a href="/dashboard/">Dashboard</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 
-    <p>Usuário logado: {{ user.username }}</p>
+    <main>
+        <!-- Google-style search bar (optional) -->
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search features, docs, or help...">
+        </div>
 
-    <a href="/login/">Login</a>
-    <br>
-    <a href="/logout/">Logout</a>
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1>Welcome to the future</h1>
+            <p>Experience the web in dark mode with purple accents</p>
+        </div>
+
+        <!-- User Card - Material Design Style -->
+        <div class="user-card">
+            <div class="user-header">
+                <div class="user-avatar">
+                    {% if user.is_authenticated %}
+                        {{ user.username|first|upper }}
+                    {% else %}
+                        👤
+                    {% endif %}
+                </div>
+                <div class="user-info">
+                    <h2>Account Overview</h2>
+                    <div class="user-status">
+                        <span class="status-dot {% if not user.is_authenticated %}offline{% endif %}"></span>
+                        <span style="color: #9ca3af;">
+                            {% if user.is_authenticated %}
+                                Online
+                            {% else %}
+                                Offline
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            {% if user.is_authenticated %}
+                <div class="username-tag">
+                    ✨ {{ user.username }} ✨
+                </div>
+                <p style="color: #9ca3af; margin-bottom: 1.5rem;">
+                    You're signed in with full access to all features.
+                </p>
+            {% else %}
+                <div class="username-tag" style="background: #2a2a35; color: #9ca3af;">
+                    👋 Guest User
+                </div>
+                <p style="color: #9ca3af; margin-bottom: 1.5rem;">
+                    Sign in to unlock all features and personalize your experience.
+                </p>
+            {% endif %}
+
+            <div class="action-buttons">
+                {% if user.is_authenticated %}
+                    <a href="/dashboard/" class="btn btn-primary">📊 Dashboard</a>
+                    <a href="/profile/" class="btn btn-secondary">👤 Profile</a>
+                    <a href="/logout/" class="btn btn-danger">🚪 Logout</a>
+                {% else %}
+                    <a href="/login/" class="btn btn-primary">🔑 Sign In</a>
+                    <a href="/register/" class="btn btn-secondary">📝 Create Account</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <h2 class="features-title">Why choose DarkFlow?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized for speed with modern Django best practices.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Purple Aesthetic</h3>
+                <p>Beautiful dark theme with eye-catching purple accents.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure by Default</h3>
+                <p>Enterprise-grade security for your peace of mind.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Responsive Design</h3>
+                <p>Perfect experience on any device, any screen size.</p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10k+</div>
+                <div class="stat-label">Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5★</div>
+                <div class="stat-label">Rating</div>
+            </div>
+        </div>
+
+        <!-- Quick Tip Card -->
+        <div style="background: linear-gradient(145deg, #1a1a24, #13131a); border-radius: 20px; padding: 2rem; border: 1px solid #2a2a35; margin-top: 2rem;">
+            <h3 style="color: #a78bfa; margin-bottom: 1rem; font-size: 1.3rem;">💡 Quick Tip</h3>
+            <p style="color: #9ca3af;">
+                {% if user.is_authenticated %}
+                    You can customize your experience in the dashboard settings.
+                {% else %}
+                    Create an account to save your preferences and access exclusive features.
+                {% endif %}
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 DarkFlow. Made with 💜 for dark mode lovers</p>
+    </footer>
 </body>
 </html>
