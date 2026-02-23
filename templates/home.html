@@ -23,7 +23,6 @@
             line-height: 1.6;
         }
 
-        /* ===== SIDEBAR ===== */
         .sidebar {
             width: 240px;
             height: 100vh;
@@ -64,20 +63,18 @@
             color: #a78bfa;
         }
 
-        /* ===== CONTEÚDO ===== */
         .content {
             margin-left: 240px;
-            padding-top: 70px; /* altura exata do header */
+            padding-top: 70px;
         }
 
-        /* ===== HEADER FIXO ===== */
         header {
             background: rgba(18, 18, 24, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #2a2a35;
             position: fixed;
             top: 0;
-            left: 240px; /* começa depois da sidebar */
+            left: 240px;
             right: 0;
             height: 70px;
             display: flex;
@@ -93,7 +90,6 @@
             align-items: center;
         }
 
-        /* BARRA DE PESQUISA */
         .search-container {
             flex: 1;
             display: flex;
@@ -107,14 +103,6 @@
             border: 1px solid #2a2a35;
             border-radius: 50px;
             color: #fff;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .search-box:focus {
-            outline: none;
-            border-color: #7c3aed;
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
         }
 
         .logo {
@@ -152,15 +140,11 @@
 
         .welcome-section h1 {
             font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
         }
 
         .welcome-section p {
             color: #9ca3af;
         }
-
-                /* ===== USER TOP BAR ===== */
 
         .top-user {
             display: flex;
@@ -177,33 +161,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
             color: white;
-        }
-
-        .top-user-info {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
         }
 
         .top-username {
             font-size: 0.9rem;
-            font-weight: 500;
-            color: #fff;
-        }
-
-        .top-status {
-            font-size: 0.75rem;
-        }
-
-        .top-status.online {
-            color: #10b981;
-        }
-
-        .top-status.offline {
-            color: #ef4444;
         }
 
         footer {
@@ -212,14 +174,35 @@
             padding: 2rem;
             text-align: center;
             color: #6b7280;
-            margin-top: 2rem;
+        }
+
+        /* NOVO: estilo dos posts (sem quebrar layout) */
+        .post-card {
+            background: #13131a;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
+        }
+
+        .post-card h2 {
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-card p {
+            color: #d1d5db;
+            margin: 1rem 0;
+        }
+
+        .post-card small {
+            color: #9ca3af;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Barra Lateral -->
     <div class="sidebar">
         <h2>Menu</h2>
         <ul>
@@ -229,68 +212,68 @@
         </ul>
     </div>
 
-    <!-- CONTEÚDO -->
     <div class="content">
 
         <header>
-    <nav>
-        <div class="logo">Portal de Conhecimentos</div>
+            <nav>
+                <div class="logo">Portal de Conhecimentos</div>
 
-        <!-- Barra de Pesquisa -->
-        <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search features, docs, or help...">
-        </div>
-
-        <div class="nav-links">
-            <a href="/">Home</a>
-
-            <a href="/login/">Login</a>
-
-            <a href="/logout/">Logout</a>
-
-            <!-- USER TOP BAR -->
-    <div class="top-user">
-        <div class="top-avatar">
-            {% if user.is_authenticated %}
-                {{ user.username|first|upper }}
-            {% else %}
-                👤
-            {% endif %}
-        </div>
-
-        <div class="top-user-info">
-            <span class="top-username">
-                {% if user.is_authenticated %}
-                    {{ user.username }}
-                {% else %}
-                    Usuário
-                {% endif %}
-            </span>
-
-            <span class="top-status 
-                {% if user.is_authenticated %}online{% else %}offline{% endif %}">
-                {% if user.is_authenticated %}
-                    Online
-                {% else %}
-                    Offline
-                {% endif %}
-            </span>
-        </div>
+                <div class="search-container">
+                    <input type="text" class="search-box" placeholder="Buscar...">
                 </div>
-            </div>
-        </div>
-    </nav>
-</header>
+
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/login/">Login</a>
+                    <a href="/logout/">Logout</a>
+
+                    <div class="top-user">
+                        <div class="top-avatar">
+                            {% if user.is_authenticated %}
+                                {{ user.username|first|upper }}
+                            {% else %}
+                                👤
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <span class="top-username">
+                                {% if user.is_authenticated %}
+                                    {{ user.username }}
+                                {% else %}
+                                    Usuário
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <main>
+
             <div class="welcome-section">
                 <h1>Bem-Vindo ao Portal de Conhecimento</h1>
-                <p>Aqui ficará o conteúdo principal</p>
+                <p>Conteúdos recentes da empresa</p>
             </div>
+
+            <!-- POSTS DINÂMICOS -->
+            {% for post in posts %}
+                <div class="post-card">
+                    <h2>{{ post.titulo }}</h2>
+                    <p>{{ post.conteudo }}</p>
+                    <small>
+                        Autor: {{ post.autor }} | {{ post.criado_em }}
+                    </small>
+                </div>
+            {% empty %}
+                <p style="color:#9ca3af;">Nenhum post encontrado.</p>
+            {% endfor %}
+
         </main>
 
         <footer>
-            <p>© 2026 Todos os direitos reservados.💜</p>
+            <p>© 2026 Todos os direitos reservados 💜</p>
         </footer>
 
     </div>

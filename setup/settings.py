@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core', #Adicione o seu app aqui
+    'users',
+    'posts',
 ]
 
 MIDDLEWARE = [
