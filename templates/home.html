@@ -42,7 +42,6 @@
 
         .sidebar ul {
             list-style: none;
-            padding: 0;
         }
 
         .sidebar ul li {
@@ -116,6 +115,7 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -151,6 +151,7 @@
             align-items: center;
             gap: 0.8rem;
             margin-left: 1.5rem;
+            cursor: pointer;
         }
 
         .top-avatar {
@@ -176,7 +177,6 @@
             color: #6b7280;
         }
 
-        /* NOVO: estilo dos posts (sem quebrar layout) */
         .post-card {
             background: #13131a;
             padding: 1.5rem;
@@ -227,7 +227,8 @@
                     <a href="/login/">Login</a>
                     <a href="/logout/">Logout</a>
 
-                    <div class="top-user">
+                    <!-- PERFIL CLICÁVEL -->
+                    <a href="/perfil/" class="top-user">
                         <div class="top-avatar">
                             {% if user.is_authenticated %}
                                 {{ user.username|first|upper }}
@@ -245,7 +246,7 @@
                                 {% endif %}
                             </span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </nav>
         </header>
