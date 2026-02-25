@@ -1,0 +1,15 @@
+<h1>Documentos Disponíveis</h1>
+
+{% for post in posts %}
+    <div class="documento-card">
+        <h3>{{ post.titulo }}</h3>
+
+        {% if post.arquivo %}
+            <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
+                📄 Baixar documento
+            </a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Nenhum documento disponível.</p>
+{% endfor %}

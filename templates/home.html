@@ -264,6 +264,12 @@
                     <h2>{{ post.titulo }}</h2>
                     <p>{{ post.conteudo }}</p>
                     <small>
+                        {% if post.arquivo %}
+                        <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
+                        📄 Baixar documento
+                        </a>
+                        {% endif %}
+
                         Autor: {{ post.autor }} | {{ post.criado_em }}
                     </small>
                 </div>
