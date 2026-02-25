@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from posts.models import Post
+from posts.models import Post 
+from django.shortcuts import render
 
 
 # HOME (com posts ordenados)
@@ -55,5 +57,14 @@ def contact_view(request):
     return HttpResponse("Contato")
 
 
+# DOCUMENTOS (mostrar apenas posts com arquivo)
 def documents(request):
-    return HttpResponse("Documentos")
+    posts = Post.objects.filter(
+        arquivo__isnull=False
+    ).exclude(
+        arquivo=''
+    ).order_by('-criado_em')
+
+    return render(request, 'documentos.html', {
+        'posts': posts
+    })

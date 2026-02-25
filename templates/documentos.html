@@ -1,15 +1,97 @@
-<h1>Documentos Disponíveis</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentos</title>
 
-{% for post in posts %}
-    <div class="documento-card">
-        <h3>{{ post.titulo }}</h3>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 3rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-card {
+            background: #13131a;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
+            transition: 0.3s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            border-color: #7c3aed;
+        }
+
+        .post-card h2 {
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-card small {
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .btn-download {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            opacity: 0.85;
+        }
+
+        .empty {
+            text-align: center;
+            color: #9ca3af;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="page-title">📁 Documentos Disponíveis</h1>
+
+    {% for post in posts %}
         {% if post.arquivo %}
+        <div class="post-card">
+            <h2>{{ post.titulo }}</h2>
+            <small>
+                Publicado em {{ post.criado_em|date:"d/m/Y H:i" }} | 
+                Autor: {{ post.autor }}
+            </small>
+
             <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
                 📄 Baixar documento
             </a>
+        </div>
         {% endif %}
-    </div>
-{% empty %}
-    <p>Nenhum documento disponível.</p>
-{% endfor %}
+    {% empty %}
+        <p class="empty">Nenhum documento disponível no momento.</p>
+    {% endfor %}
+
+</body>
+</html>
