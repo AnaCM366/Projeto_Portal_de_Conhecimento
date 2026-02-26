@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from core import views
+# from documents import views as DocumetoView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -15,6 +16,9 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('documents/', views.documents, name='documents'),
     path('perfil/', views.profile_view, name='perfil'),
+
+    
+    # path('documentsNovo/', DocumetoView.documentos, name='documentos'),
     
 ]
 

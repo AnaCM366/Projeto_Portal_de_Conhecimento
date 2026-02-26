@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Documentos</title>
@@ -63,6 +64,22 @@
             opacity: 0.85;
         }
 
+        /* Campo de Busca */
+        .search-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 400px;
+            padding: 0.6rem 1.2rem;
+            background: #1e1e2a;
+            border: 1px solid #2a2a35;
+            border-radius: 50px;
+            color: #fff;
+        }
+
         .empty {
             text-align: center;
             color: #9ca3af;
@@ -75,23 +92,32 @@
 
     <h1 class="page-title">📁 Documentos Disponíveis</h1>
 
-    {% for post in posts %}
-        {% if post.arquivo %}
-        <div class="post-card">
-            <h2>{{ post.titulo }}</h2>
-            <small>
-                Publicado em {{ post.criado_em|date:"d/m/Y H:i" }} | 
-                Autor: {{ post.autor }}
-            </small>
+    <!--Campo de Busca-->
+    <div class="search-container">
+        <form method="GET">
+            <input type="text" name="busca" class="search-box" placeholder="'Buscar documentos..."
+                value="{{ request.GET.busca }}">
+        </form>
+    </div>
 
-            <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
-                📄 Baixar documento
-            </a>
-        </div>
-        {% endif %}
+    {% for post in posts %}
+    {% if post.arquivo %}
+    <div class="post-card">
+        <h2>{{ post.titulo }}</h2>
+        <small>
+            Publicado em {{ post.criado_em|date:"d/m/Y H:i" }} |
+            Autor: {{ post.autor }}
+        </small>
+
+        <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
+            📄 Baixar documento
+        </a>
+    </div>
+    {% endif %}
     {% empty %}
-        <p class="empty">Nenhum documento disponível no momento.</p>
+    <p class="empty">Nenhum documento disponível no momento.</p>
     {% endfor %}
 
 </body>
+
 </html>

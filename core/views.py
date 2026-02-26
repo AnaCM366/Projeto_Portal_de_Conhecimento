@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from posts.models import Post
-from posts.models import Post 
-from django.shortcuts import render
-
 
 # HOME (com posts ordenados)
 def home(request):
@@ -59,12 +57,13 @@ def contact_view(request):
 
 # DOCUMENTOS (mostrar apenas posts com arquivo)
 def documents(request):
+    termo_de_busca = request.GET.get('busca', '')
+
     posts = Post.objects.filter(
-        arquivo__isnull=False
-    ).exclude(
-        arquivo=''
+        titulo__contains= termo_de_busca 
     ).order_by('-criado_em')
 
     return render(request, 'documentos.html', {
-        'posts': posts
+        'posts': posts,
+        'busca': termo_de_busca
     })

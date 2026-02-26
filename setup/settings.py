@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core', #Adicione o seu app aqui
     'users',
     'posts',
+    'documents',
 ]
 
 MIDDLEWARE = [
