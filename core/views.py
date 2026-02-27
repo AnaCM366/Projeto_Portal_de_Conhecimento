@@ -5,7 +5,11 @@ from posts.models import Post
 
 # HOME (com posts ordenados)
 def home(request):
-    posts = Post.objects.all().order_by('-criado_em')
+    searchBox = request.GET.get('campoBuscaHome', '')
+
+    posts = Post.objects.filter(
+        titulo__contains= searchBox 
+    ).order_by('-criado_em')
 
     return render(request, "home.html", {
         "posts": posts
