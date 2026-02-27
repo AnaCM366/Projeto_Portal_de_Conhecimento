@@ -219,7 +219,11 @@
                 <div class="logo">Portal de Conhecimentos</div>
 
                 <div class="search-container">
-                    <input type="text" class="search-box" placeholder="Buscar...">
+                    <form action="/" method="GET">
+                        <input type="text" name="campoBuscaHome" class="search-box" 
+                            placeholder="Buscar postagens..." 
+                            value="{{ request.GET.campoBuscaHome }}">
+                    </form>
                 </div>
 
                 <div class="nav-links">
