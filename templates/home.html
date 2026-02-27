@@ -57,7 +57,8 @@
             transition: 0.3s;
         }
 
-        .sidebar ul li a:hover {
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
             background: #1e1e2a;
             color: #a78bfa;
         }
@@ -102,6 +103,13 @@
             border: 1px solid #2a2a35;
             border-radius: 50px;
             color: #fff;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.2);
         }
 
         .logo {
@@ -121,6 +129,11 @@
         .nav-links a {
             color: #e0e0e0;
             text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #a78bfa;
         }
 
         main {
@@ -140,10 +153,12 @@
 
         .welcome-section h1 {
             font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         .welcome-section p {
             color: #9ca3af;
+            font-size: 1.2rem;
         }
 
         .top-user {
@@ -152,6 +167,8 @@
             gap: 0.8rem;
             margin-left: 1.5rem;
             cursor: pointer;
+            text-decoration: none;
+            color: #e0e0e0;
         }
 
         .top-avatar {
@@ -163,6 +180,7 @@
             align-items: center;
             justify-content: center;
             color: white;
+            font-weight: 600;
         }
 
         .top-username {
@@ -177,17 +195,36 @@
             color: #6b7280;
         }
 
+        .posts-container {
+            margin-bottom: 3rem;
+        }
+
         .post-card {
             background: #13131a;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-radius: 16px;
             border: 1px solid #2a2a35;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .post-card:hover {
+            border-color: #a78bfa;
+            transform: translateY(-2px);
         }
 
         .post-card h2 {
             color: #a78bfa;
             margin-bottom: 0.5rem;
+        }
+
+        .post-card h2 a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+
+        .post-card h2 a:hover {
+            text-decoration: underline;
         }
 
         .post-card p {
@@ -196,6 +233,98 @@
         }
 
         .post-card small {
+            color: #9ca3af;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            color: #a78bfa;
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            background: #1e1e2a;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .btn-download:hover {
+            background: #2a2a35;
+        }
+
+        .comment-count {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .comment-count:hover {
+            color: #a78bfa;
+        }
+
+        .feedback-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #13131a;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
+        }
+
+        .feedback-section h3 {
+            color: #a78bfa;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-input-wrapper textarea {
+            width: 100%;
+            padding: 1rem;
+            background: #1e1e2a;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .feedback-input-wrapper textarea:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            align-self: flex-end;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            background: #13131a;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
             color: #9ca3af;
         }
     </style>
@@ -206,8 +335,9 @@
     <div class="sidebar">
         <h2>Menu</h2>
         <ul>
-            <li><a href="/">🏠 Home</a></li>
+            <li><a href="/" class="active">🏠 Home</a></li>
             <li><a href="/documents/">📁 Documentos</a></li>
+            <li><a href="/comentarios/">💬 Central de Comentários</a></li>
             <li><a href="/faturamento/">📊 Faturamento</a></li>
         </ul>
     </div>
@@ -228,10 +358,13 @@
 
                 <div class="nav-links">
                     <a href="/">Home</a>
-                    <a href="/login/">Login</a>
-                    <a href="/logout/">Logout</a>
+                    <a href="/comentarios/">Comentários</a>
+                    {% if user.is_authenticated %}
+                        <a href="/logout/">Logout</a>
+                    {% else %}
+                        <a href="/login/">Login</a>
+                    {% endif %}
 
-                    <!-- PERFIL CLICÁVEL -->
                     <a href="/perfil/" class="top-user">
                         <div class="top-avatar">
                             {% if user.is_authenticated %}
@@ -246,7 +379,7 @@
                                 {% if user.is_authenticated %}
                                     {{ user.username }}
                                 {% else %}
-                                    Usuário
+                                    Visitante
                                 {% endif %}
                             </span>
                         </div>
@@ -263,43 +396,76 @@
             </div>
 
             <!-- POSTS DINÂMICOS -->
-            {% for post in posts %}
-                <div class="post-card">
-                    <h2>{{ post.titulo }}</h2>
-                    <p>{{ post.conteudo }}</p>
-                    <small>
-                        {% if post.arquivo %}
-                        <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
-                        📄 Baixar documento
-                        </a>
-                        {% endif %}
+            <div class="posts-container">
+                {% for post in posts %}
+                    <div class="post-card">
+                        <h2>
+                            <a href="{% url 'detalhe_post' post.id %}">
+                                {{ post.titulo }}
+                            </a>
+                        </h2>
+                        <p>{{ post.conteudo|truncatechars:300 }}</p>
+                        <small>
+                            <div class="post-meta">
+                                {% if post.arquivo %}
+                                    <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
+                                        📄 Baixar documento
+                                    </a>
+                                {% endif %}
 
-                        Autor: {{ post.autor }} | {{ post.criado_em }}
-                    </small>
-                </div>
-            {% empty %}
-                <p style="color:#9ca3af;">Nenhum post encontrado.</p>
-            {% endfor %}
-{% if user.is_authenticated %}
-    <form method="POST" action="{% url 'home' %}">
-        {% csrf_token %}
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div class="feedback-input-wrapper">
-                {{ form.comentario }}
+                                <span>👤 Autor: {{ post.autor.username }}</span>
+                                <span>📅 {{ post.criado_em|date:"d/m/Y H:i" }}</span>
+                                
+                                <a href="{% url 'detalhe_post' post.id %}" class="comment-count">
+                                    💬 {{ post.feedbacks.count }} comentário{{ post.feedbacks.count|pluralize }}
+                                </a>
+                            </div>
+                        </small>
+                    </div>
+                {% empty %}
+                    <div class="no-results">
+                        {% if request.GET.campoBuscaHome %}
+                            Nenhum post encontrado para "{{ request.GET.campoBuscaHome }}"
+                        {% else %}
+                            Nenhum post cadastrado ainda.
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
-            
-            <button type="submit" class="top-avatar" style="border:none; cursor:pointer; width: 100%; max-width: 150px; padding: 10px 15px; font-size: 0.85rem; border-radius: 8px; font-weight: 600; align-self: flex-end; transition: transform 0.2s;">
-                Comentar 💜
-            </button>
-        </div>
-    </form>
-{% else %}
-    <p style="color: #9ca3af; font-size: 0.9rem; text-align: center;">
-        <a href="/login/" style="color: #a78bfa; text-decoration: none;">Faça login</a> para deixar um feedback.
-    </p>
-{% endif %}
+
+            <!-- SEÇÃO DE FEEDBACK (COMENTÁRIO RÁPIDO) -->
+            {% if user.is_authenticated %}
+                <div class="feedback-section">
+                    <h3>Deixe um comentário rápido</h3>
+                    <p style="color: #9ca3af; margin-bottom: 1rem;">
+                        Selecione um post acima para comentar, ou 
+                        <a href="/comentarios/" style="color: #a78bfa;">visite a Central de Comentários</a>
+                        para ver todos.
+                    </p>
+                    
+                    <form method="POST" action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="1"> <!-- Isso será ajustado no JavaScript -->
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="feedback-input-wrapper">
+                                {{ form.comentario }}
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                Comentar 💜
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <div class="feedback-section" style="text-align: center;">
+                    <p style="color: #9ca3af; font-size: 0.9rem;">
+                        👤 <a href="/login/" style="color: #a78bfa; text-decoration: none;">Faça login</a> 
+                        para comentar nos posts e interagir com a comunidade.
+                    </p>
+                </div>
+            {% endif %}
 
         </main>
 
@@ -308,6 +474,36 @@
         </footer>
 
     </div>
+
+    <!-- Script para melhorar a experiência do usuário -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona confirmação antes de enviar comentário
+            const commentForm = document.querySelector('.feedback-section form');
+            if (commentForm) {
+                commentForm.addEventListener('submit', function(e) {
+                    const commentText = this.querySelector('textarea').value.trim();
+                    if (!commentText) {
+                        e.preventDefault();
+                        alert('Por favor, escreva um comentário antes de enviar.');
+                    }
+                });
+            }
+
+            // Destaca o termo de busca nos resultados
+            const searchTerm = new URLSearchParams(window.location.search).get('campoBuscaHome');
+            if (searchTerm) {
+                const postContents = document.querySelectorAll('.post-card p');
+                postContents.forEach(content => {
+                    const html = content.innerHTML;
+                    const regex = new RegExp(searchTerm, 'gi');
+                    content.innerHTML = html.replace(regex, match => 
+                        `<span style="background: #2a2a35; color: #a78bfa; padding: 0 2px;">${match}</span>`
+                    );
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
