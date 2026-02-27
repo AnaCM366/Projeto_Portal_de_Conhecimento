@@ -31,3 +31,5 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback de {self.usuario} em {self.post.titulo}"
+    
+    

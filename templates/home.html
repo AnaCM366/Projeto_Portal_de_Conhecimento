@@ -280,6 +280,26 @@
             {% empty %}
                 <p style="color:#9ca3af;">Nenhum post encontrado.</p>
             {% endfor %}
+{% if user.is_authenticated %}
+    <form method="POST" action="{% url 'home' %}">
+        {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ post.id }}">
+        
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="feedback-input-wrapper">
+                {{ form.comentario }}
+            </div>
+            
+            <button type="submit" class="top-avatar" style="border:none; cursor:pointer; width: 100%; max-width: 150px; padding: 10px 15px; font-size: 0.85rem; border-radius: 8px; font-weight: 600; align-self: flex-end; transition: transform 0.2s;">
+                Comentar 💜
+            </button>
+        </div>
+    </form>
+{% else %}
+    <p style="color: #9ca3af; font-size: 0.9rem; text-align: center;">
+        <a href="/login/" style="color: #a78bfa; text-decoration: none;">Faça login</a> para deixar um feedback.
+    </p>
+{% endif %}
 
         </main>
 
