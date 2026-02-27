@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Comentários</title>
+    <title>Home</title>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
@@ -66,7 +66,6 @@
         .content {
             margin-left: 240px;
             padding-top: 70px;
-            min-height: 100vh;
         }
 
         header {
@@ -137,6 +136,31 @@
             color: #a78bfa;
         }
 
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(145deg, #13131a, #0d0d12);
+            border-radius: 32px;
+            margin-bottom: 3rem;
+            border: 1px solid #2a2a35;
+        }
+
+        .welcome-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            color: #9ca3af;
+            font-size: 1.2rem;
+        }
+
         .top-user {
             display: flex;
             align-items: center;
@@ -163,254 +187,6 @@
             font-size: 0.9rem;
         }
 
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .page-header {
-            margin-bottom: 2rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            color: #a78bfa;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            color: #9ca3af;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: #13131a;
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid #2a2a35;
-            text-align: center;
-        }
-
-        .stat-card h3 {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #a78bfa;
-        }
-
-        .filter-section {
-            background: #13131a;
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid #2a2a35;
-            margin-bottom: 2rem;
-        }
-
-        .filter-form {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .filter-input {
-            flex: 1;
-            padding: 0.8rem 1.2rem;
-            background: #1e1e2a;
-            border: 1px solid #2a2a35;
-            border-radius: 8px;
-            color: #fff;
-        }
-
-        .filter-input:focus {
-            outline: none;
-            border-color: #a78bfa;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 2rem;
-            background: linear-gradient(135deg, #7c3aed, #a78bfa);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .filter-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .top-sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .top-users, .top-posts {
-            background: #13131a;
-            padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid #2a2a35;
-        }
-
-        .top-users h3, .top-posts h3 {
-            color: #a78bfa;
-            margin-bottom: 1rem;
-        }
-
-        .top-list {
-            list-style: none;
-        }
-
-        .top-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #2a2a35;
-        }
-
-        .top-list li:last-child {
-            border-bottom: none;
-        }
-
-        .rank {
-            color: #a78bfa;
-            font-weight: 600;
-            margin-right: 1rem;
-        }
-
-        .comments-section {
-            background: #13131a;
-            border-radius: 16px;
-            border: 1px solid #2a2a35;
-            overflow: hidden;
-        }
-
-        .comments-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #2a2a35;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .comments-header h2 {
-            color: #a78bfa;
-        }
-
-        .comments-count {
-            background: #1e1e2a;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            color: #9ca3af;
-        }
-
-        .comment-item {
-            padding: 1.5rem;
-            border-bottom: 1px solid #2a2a35;
-            transition: background 0.2s;
-        }
-
-        .comment-item:hover {
-            background: #1a1a24;
-        }
-
-        .comment-item:last-child {
-            border-bottom: none;
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .comment-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .comment-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4f46e5, #a78bfa);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .comment-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .comment-username {
-            color: #a78bfa;
-            font-weight: 600;
-        }
-
-        .comment-date {
-            color: #6b7280;
-            font-size: 0.85rem;
-        }
-
-        .comment-post-link {
-            color: #9ca3af;
-            font-size: 0.9rem;
-            text-decoration: none;
-            padding: 0.3rem 1rem;
-            background: #1e1e2a;
-            border-radius: 20px;
-            transition: all 0.2s;
-        }
-
-        .comment-post-link:hover {
-            background: #2a2a35;
-            color: #a78bfa;
-        }
-
-        .comment-content {
-            color: #d1d5db;
-            margin-left: 3.5rem;
-            line-height: 1.6;
-        }
-
-        .back-home {
-            margin-bottom: 1rem;
-        }
-
-        .back-home a {
-            color: #9ca3af;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-home a:hover {
-            color: #a78bfa;
-        }
-
         footer {
             background: #0d0d12;
             border-top: 1px solid #2a2a35;
@@ -419,41 +195,170 @@
             color: #6b7280;
         }
 
-        .no-comments {
-            padding: 3rem;
+        .posts-container {
+            margin-bottom: 3rem;
+        }
+
+        .post-card {
+            background: #13131a;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .post-card:hover {
+            border-color: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        .post-card h2 {
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-card h2 a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+
+        .post-card h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .post-card p {
+            color: #d1d5db;
+            margin: 1rem 0;
+        }
+
+        .post-card small {
+            color: #9ca3af;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            color: #a78bfa;
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            background: #1e1e2a;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .btn-download:hover {
+            background: #2a2a35;
+        }
+
+        .comment-count {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .comment-count:hover {
+            color: #a78bfa;
+        }
+
+        .feedback-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #13131a;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
+        }
+
+        .feedback-section h3 {
+            color: #a78bfa;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-input-wrapper textarea {
+            width: 100%;
+            padding: 1rem;
+            background: #1e1e2a;
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .feedback-input-wrapper textarea:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            align-self: flex-end;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        .no-results {
             text-align: center;
+            padding: 3rem;
+            background: #13131a;
+            border-radius: 16px;
+            border: 1px solid #2a2a35;
             color: #9ca3af;
         }
     </style>
 </head>
+
 <body>
 
     <div class="sidebar">
         <h2>Menu</h2>
         <ul>
-            <li><a href="/">🏠 Home</a></li>
+            <li><a href="/" class="active">🏠 Home</a></li>
             <li><a href="/documents/">📁 Documentos</a></li>
-            <li><a href="/comentarios/" class="active">💬 Central de Comentários</a></li>
+            <li><a href="/comentarios/">💬 Central de Comentários</a></li>
             <li><a href="/faturamento/">📊 Faturamento</a></li>
         </ul>
     </div>
 
     <div class="content">
+
         <header>
             <nav>
                 <div class="logo">Portal de Conhecimentos</div>
 
                 <div class="search-container">
-                    <form action="{% url 'central_comentarios' %}" method="GET">
-                        <input type="text" name="filtro" class="search-box" 
-                            placeholder="Filtrar comentários..." 
-                            value="{{ filtro }}">
+                    <form action="/" method="GET">
+                        <input type="text" name="campoBuscaHome" class="search-box" 
+                            placeholder="Buscar postagens..." 
+                            value="{{ request.GET.campoBuscaHome }}">
                     </form>
                 </div>
 
                 <div class="nav-links">
                     <a href="/">Home</a>
-                    <a href="/comentarios/" class="active">Comentários</a>
+                    <a href="/comentarios/">Comentários</a>
                     {% if user.is_authenticated %}
                         <a href="/logout/">Logout</a>
                     {% else %}
@@ -484,149 +389,121 @@
         </header>
 
         <main>
-            <div class="back-home">
-                <a href="/">← Voltar para Home</a>
+
+            <div class="welcome-section">
+                <h1>Bem-Vindo ao Portal de Conhecimento</h1>
+                <p>Conteúdos recentes da empresa</p>
             </div>
 
-            <div class="page-header">
-                <h1>💬 Central de Comentários</h1>
-                <p>Veja todos os comentários da comunidade</p>
-            </div>
-
-            <!-- Cards de Estatísticas -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total de Comentários</h3>
-                    <div class="stat-number">{{ total_comentarios }}</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Posts Comentados</h3>
-                    <div class="stat-number">{{ total_posts_comentados }}</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Média por Post</h3>
-                    <div class="stat-number">
-                        {% if total_posts_comentados > 0 %}
-                            {{ total_comentarios|floatformat:1 }}
-                        {% else %}
-                            0
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Top Usuários e Posts -->
-            <div class="top-sections">
-                <div class="top-users">
-                    <h3>🏆 Top Comentaristas</h3>
-                    <ul class="top-list">
-                        {% for usuario in usuarios_mais_ativos %}
-                            <li>
-                                <span>
-                                    <span class="rank">#{{ forloop.counter }}</span>
-                                    {{ usuario.usuario__username }}
-                                </span>
-                                <span style="color: #a78bfa;">{{ usuario.total }} comentário{{ usuario.total|pluralize }}</span>
-                            </li>
-                        {% empty %}
-                            <li>Nenhum comentário ainda</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <div class="top-posts">
-                    <h3>📊 Posts Mais Comentados</h3>
-                    <ul class="top-list">
-                        {% for post in posts_mais_comentados %}
-                            <li>
-                                <span>
-                                    <span class="rank">#{{ forloop.counter }}</span>
-                                    <a href="{% url 'detalhe_post' post.id %}" style="color: #e0e0e0; text-decoration: none;">
-                                        {{ post.titulo|truncatechars:30 }}
-                                    </a>
-                                </span>
-                                <span style="color: #a78bfa;">{{ post.total_comentarios }} comentário{{ post.total_comentarios|pluralize }}</span>
-                            </li>
-                        {% empty %}
-                            <li>Nenhum post com comentários</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Seção de Filtro -->
-            <div class="filter-section">
-                <form class="filter-form" method="GET" action="{% url 'central_comentarios' %}">
-                    <input type="text" name="filtro" class="filter-input" 
-                        placeholder="Buscar por post, usuário ou conteúdo..." 
-                        value="{{ filtro }}">
-                    <button type="submit" class="filter-btn">Filtrar</button>
-                    {% if filtro %}
-                        <a href="{% url 'central_comentarios' %}" class="filter-btn" style="background: #1e1e2a;">Limpar</a>
-                    {% endif %}
-                </form>
-            </div>
-
-            <!-- Lista de Comentários -->
-            <div class="comments-section">
-                <div class="comments-header">
-                    <h2>Todos os Comentários</h2>
-                    <span class="comments-count">{{ feedbacks|length }} comentário{{ feedbacks|length|pluralize }}</span>
-                </div>
-
-                {% for feedback in feedbacks %}
-                    <div class="comment-item">
-                        <div class="comment-header">
-                            <div class="comment-user">
-                                <div class="comment-avatar">
-                                    {{ feedback.usuario.username|first|upper }}
-                                </div>
-                                <div class="comment-info">
-                                    <span class="comment-username">{{ feedback.usuario.username }}</span>
-                                    <span class="comment-date">{{ feedback.data_envio|date:"d/m/Y H:i" }}</span>
-                                </div>
-                            </div>
-                            <a href="{% url 'detalhe_post' feedback.post.id %}" class="comment-post-link">
-                                Ver post → {{ feedback.post.titulo|truncatechars:30 }}
+            <!-- POSTS DINÂMICOS -->
+            <div class="posts-container">
+                {% for post in posts %}
+                    <div class="post-card">
+                        <h2>
+                            <a href="{% url 'detalhe_post' post.id %}">
+                                {{ post.titulo }}
                             </a>
-                        </div>
-                        <div class="comment-content">
-                            {{ feedback.comentario|linebreaks }}
-                        </div>
+                        </h2>
+                        <p>{{ post.conteudo|truncatechars:300 }}</p>
+                        <small>
+                            <div class="post-meta">
+                                {% if post.arquivo %}
+                                    <a href="{{ post.arquivo.url }}" target="_blank" class="btn-download">
+                                        📄 Baixar documento
+                                    </a>
+                                {% endif %}
+
+                                <span>👤 Autor: {{ post.autor.username }}</span>
+                                <span>📅 {{ post.criado_em|date:"d/m/Y H:i" }}</span>
+                                
+                                <a href="{% url 'detalhe_post' post.id %}" class="comment-count">
+                                    💬 {{ post.feedbacks.count }} comentário{{ post.feedbacks.count|pluralize }}
+                                </a>
+                            </div>
+                        </small>
                     </div>
                 {% empty %}
-                    <div class="no-comments">
-                        {% if filtro %}
-                            Nenhum comentário encontrado para "{{ filtro }}"
+                    <div class="no-results">
+                        {% if request.GET.campoBuscaHome %}
+                            Nenhum post encontrado para "{{ request.GET.campoBuscaHome }}"
                         {% else %}
-                            Nenhum comentário ainda. Seja o primeiro a comentar!
+                            Nenhum post cadastrado ainda.
                         {% endif %}
                     </div>
                 {% endfor %}
             </div>
 
-            <!-- Link rápido para comentar -->
+            <!-- SEÇÃO DE FEEDBACK (COMENTÁRIO RÁPIDO) -->
             {% if user.is_authenticated %}
-                <div class="filter-section" style="margin-top: 2rem; text-align: center;">
+                <div class="feedback-section">
+                    <h3>Deixe um comentário rápido</h3>
                     <p style="color: #9ca3af; margin-bottom: 1rem;">
-                        Quer comentar em um post?
+                        Selecione um post acima para comentar, ou 
+                        <a href="/comentarios/" style="color: #a78bfa;">visite a Central de Comentários</a>
+                        para ver todos.
                     </p>
-                    <a href="/" class="filter-btn">Ir para Home e comentar</a>
+                    
+                    <form method="POST" action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="1"> <!-- Isso será ajustado no JavaScript -->
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="feedback-input-wrapper">
+                                {{ form.comentario }}
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                Comentar 💜
+                            </button>
+                        </div>
+                    </form>
                 </div>
             {% else %}
-                <div class="filter-section" style="margin-top: 2rem; text-align: center;">
-                    <p style="color: #9ca3af;">
+                <div class="feedback-section" style="text-align: center;">
+                    <p style="color: #9ca3af; font-size: 0.9rem;">
                         👤 <a href="/login/" style="color: #a78bfa; text-decoration: none;">Faça login</a> 
-                        para comentar nos posts.
+                        para comentar nos posts e interagir com a comunidade.
                     </p>
                 </div>
             {% endif %}
+
         </main>
 
         <footer>
             <p>© 2026 Todos os direitos reservados 💜</p>
         </footer>
+
     </div>
+
+    <!-- Script para melhorar a experiência do usuário -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona confirmação antes de enviar comentário
+            const commentForm = document.querySelector('.feedback-section form');
+            if (commentForm) {
+                commentForm.addEventListener('submit', function(e) {
+                    const commentText = this.querySelector('textarea').value.trim();
+                    if (!commentText) {
+                        e.preventDefault();
+                        alert('Por favor, escreva um comentário antes de enviar.');
+                    }
+                });
+            }
+
+            // Destaca o termo de busca nos resultados
+            const searchTerm = new URLSearchParams(window.location.search).get('campoBuscaHome');
+            if (searchTerm) {
+                const postContents = document.querySelectorAll('.post-card p');
+                postContents.forEach(content => {
+                    const html = content.innerHTML;
+                    const regex = new RegExp(searchTerm, 'gi');
+                    content.innerHTML = html.replace(regex, match => 
+                        <span style="background: #2a2a35; color: #a78bfa; padding: 0 2px;">${match}</span>
+                    );
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
