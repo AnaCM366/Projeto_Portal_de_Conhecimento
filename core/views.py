@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count
 from posts.models import Post, Feedback
-from .forms import FeedbackForm  # Você precisará criar este forms.py
+from posts.forms import FeedbackForm  # Você precisará criar este forms.py
 
 # HOME (com posts ordenados)
 def home(request):
