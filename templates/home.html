@@ -498,7 +498,7 @@
                     const html = content.innerHTML;
                     const regex = new RegExp(searchTerm, 'gi');
                     content.innerHTML = html.replace(regex, match => 
-                        `<span style="background: #2a2a35; color: #a78bfa; padding: 0 2px;">${match}</span>`
+                        <span style="background: #2a2a35; color: #a78bfa; padding: 0 2px;">${match}</span>
                     );
                 });
             }
