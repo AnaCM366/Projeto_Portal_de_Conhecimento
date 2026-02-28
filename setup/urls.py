@@ -15,8 +15,11 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('documents/', views.documents, name='documents'),
     path('perfil/', views.profile_view, name='perfil'),
-    
-    # NOVAS URLs para o sistema de comentários
+
+    # 💰 NOVA ROTA FATURAMENTO
+    path('faturamento/', views.faturamento, name='faturamento'),
+
+    # SISTEMA DE COMENTÁRIOS
     path('post/<int:post_id>/', views.detalhe_post, name='detalhe_post'),
     path('comentarios/', views.central_comentarios, name='central_comentarios'),
 ]

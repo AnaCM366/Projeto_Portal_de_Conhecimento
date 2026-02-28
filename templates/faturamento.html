@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Faturamento</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .top-section {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9fafc;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .crescimento {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .categorias ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .categorias li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grafico-container {
+            margin-top: 30px;
+        }
+
+        .barra {
+            margin-bottom: 15px;
+        }
+
+        .barra-label {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .barra-externa {
+            width: 100%;
+            background: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .barra-interna {
+            height: 22px;
+            background: #3b82f6;
+            text-align: right;
+            padding-right: 8px;
+            color: white;
+            font-size: 12px;
+            line-height: 22px;
+            width: 0;
+            transition: width 0.8s ease;
+        }
+
+        .voltar {
+            margin-top: 30px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #111827;
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+
+        .voltar:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 900px) {
+            .top-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💰 Faturamento</h1>
+
+    <div class="top-section">
+
+        <!-- Card Total -->
+        <div class="card">
+            <h2>Total Atual</h2>
+            <p><strong>R$ {{ dados.total_atual }}</strong></p>
+            <p>Total Anterior: R$ {{ dados.total_anterior }}</p>
+            <p class="crescimento">
+                Crescimento: {{ dados.crescimento }}%
+            </p>
+        </div>
+
+        <!-- Card Categorias -->
+        <div class="card categorias">
+            <h2>Receita por Categoria</h2>
+            <ul>
+                {% for item in dados.por_categoria %}
+                    <li>
+                        {{ item.nome }} — R$ {{ item.valor }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Gráfico Simulado -->
+    <div class="grafico-container">
+        <h2>Crescimento Mensal (%)</h2>
+
+        {% for item in dados.percentuais %}
+            <div class="barra">
+                <div class="barra-label">
+                    {{ item.mes }}
+                </div>
+                <div class="barra-externa">
+                    <div class="barra-interna" data-valor="{{ item.valor }}"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="/" class="voltar">Voltar para Home</a>
+
+</div>
+
+<!-- Script para aplicar largura dinâmica -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.barra-interna').forEach(function(barra) {
+            let valor = barra.getAttribute('data-valor');
+            barra.style.width = valor + "%";
+            barra.innerText = valor + "%";
+        });
+    });
+</script>
+
+</body>
+</html>
