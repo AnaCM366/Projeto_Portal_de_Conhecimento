@@ -4,19 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count
 from posts.models import Post, Feedback
 from posts.forms import FeedbackForm  # Você precisará criar este forms.py
+from django.shortcuts import render
 
-
-# ===============================
-# 🏠 HOME (com posts ordenados)
-# ===============================
+# HOME (com posts ordenados)
 def home(request):
     searchBox = request.GET.get('campoBuscaHome', '')
 
-<<<<<<< HEAD
-    posts = Post.objects.filter(
-        titulo__contains=searchBox
-    ).order_by('-criado_em')
-=======
     # Melhorando a busca para título E conteúdo
     if searchBox:
         posts = Post.objects.filter(
@@ -25,7 +18,6 @@ def home(request):
         ).order_by('-criado_em')
     else:
         posts = Post.objects.all().order_by('-criado_em')
->>>>>>> 6460ebb21dfae68d1728bf735d758cc16868991b
 
     # Processar comentário rápido da home
     if request.method == 'POST' and 'post_id' in request.POST:
@@ -43,12 +35,8 @@ def home(request):
     
     return render(request, "home.html", {
         "posts": posts,
-<<<<<<< HEAD
-        "busca": searchBox
-=======
         "form": form,
         "termo_busca": searchBox
->>>>>>> 6460ebb21dfae68d1728bf735d758cc16868991b
     })
 
 # NOVA VIEW: Detalhe do Post com comentários
@@ -114,9 +102,7 @@ def central_comentarios(request):
     }
     return render(request, 'central_comentarios.html', context)
 
-# ===============================
-# 🔐 LOGIN / LOGOUT (placeholder)
-# ===============================
+# LOGIN / LOGOUT (placeholder por enquanto)
 def login_view(request):
     return HttpResponse("Página de Login")
 
@@ -126,35 +112,21 @@ def logout_view(request):
 def register_view(request):
     return HttpResponse("Página de Registro")
 
-<<<<<<< HEAD
-
-# ===============================
-# 👤 PERFIL + PUBLICAÇÃO
-# ===============================
-@login_required
-def profile_view(request):
-
-=======
 # PERFIL + PUBLICAÇÃO
 def profile_view(request):
     # 🔥 Quando clicar no botão "Publicar"
->>>>>>> 6460ebb21dfae68d1728bf735d758cc16868991b
     if request.method == "POST":
         titulo = request.POST.get("titulo")
         conteudo = request.POST.get("conteudo")
 
+        # validação simples
         if titulo and conteudo:
             Post.objects.create(
                 titulo=titulo,
                 conteudo=conteudo,
                 autor=request.user
             )
-<<<<<<< HEAD
-
-            return redirect("/")
-=======
             return redirect("/")  # volta pra home
->>>>>>> 6460ebb21dfae68d1728bf735d758cc16868991b
 
     # Adicionar comentários do usuário no perfil
     if request.user.is_authenticated:
@@ -175,45 +147,13 @@ def profile_view(request):
         'posts_comentados': posts_comentados,
     })
 
-# ===============================
-# 📄 DETALHE DO POST
-# ===============================
-def detalhe_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-
-    return render(request, "detalhe_post.html", {
-        "post": post
-    })
-
-
-# ===============================
-# 💬 CENTRAL DE COMENTÁRIOS (Mock)
-# ===============================
-def central_comentarios(request):
-    return HttpResponse("Central de comentários - Em desenvolvimento")
-
-
-# ===============================
-# ℹ OUTRAS VIEWS
-# ===============================
+# OUTRAS VIEWS
 def about_view(request):
     return HttpResponse("Sobre nós")
 
 def contact_view(request):
     return HttpResponse("Contato")
 
-<<<<<<< HEAD
-
-# ===============================
-# 📚 DOCUMENTOS
-# ===============================
-def documents(request):
-    termo_de_busca = request.GET.get('busca', '')
-
-    posts = Post.objects.filter(
-        titulo__contains=termo_de_busca
-    ).order_by('-criado_em')
-=======
 # DOCUMENTOS (mostrar apenas posts com arquivo)
 def documents(request):
     termo_de_busca = request.GET.get('busca', '')
@@ -226,36 +166,11 @@ def documents(request):
         ).exclude(arquivo='').order_by('-criado_em')
     else:
         posts = Post.objects.exclude(arquivo='').order_by('-criado_em')
->>>>>>> 6460ebb21dfae68d1728bf735d758cc16868991b
 
     return render(request, 'documentos.html', {
         'posts': posts,
         'busca': termo_de_busca
     })
-
-
-# ===============================
-# 💰 FATURAMENTO (Mock Demonstrativo)
-# ===============================
-@login_required
+    
 def faturamento(request):
-
-    dados = {
-        "total_atual": 36200.00,
-        "total_anterior": 25700.00,
-        "crescimento": 40.67,
-        "por_categoria": [
-            {"nome": "Planos Premium", "valor": 21256.98},
-            {"nome": "Assinaturas Básicas", "valor": 15110.22},
-        ],
-        "percentuais": [
-            {"mes": "Jan", "valor": 50},
-            {"mes": "Fev", "valor": 43},
-            {"mes": "Mar", "valor": 27},
-            {"mes": "Abr", "valor": 48},
-            {"mes": "Mai", "valor": 62},
-            {"mes": "Jun", "valor": 22},
-        ]
-    }
-
-    return render(request, "faturamento.html", {"dados": dados})
+    return render(request, 'faturamento.html')
